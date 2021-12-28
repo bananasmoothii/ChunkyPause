@@ -27,9 +27,11 @@ public final class ChunkyPausePlugin extends JavaPlugin implements Listener {
 
     @EventHandler
     public void on(PlayerQuitEvent event) {
-        if (getServer().getOnlinePlayers().size() == 0) {
-            chunkyContinue();
-        }
+        Bukkit.getScheduler().runTaskLater(this, () -> {
+            if (getServer().getOnlinePlayers().size() == 0) {
+                chunkyContinue();
+            }
+        }, 100);
     }
 
     public void chunkyContinue() {
