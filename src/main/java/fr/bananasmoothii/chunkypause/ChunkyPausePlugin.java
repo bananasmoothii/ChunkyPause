@@ -1,17 +1,46 @@
 package fr.bananasmoothii.chunkypause;
 
+import org.bukkit.Bukkit;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class ChunkyPausePlugin extends JavaPlugin {
+// doing everything at once
+public final class ChunkyPausePlugin extends JavaPlugin implements Listener {
+
+    private boolean isRunning = true;
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
-
+        getServer().getPluginManager().registerEvents(this, this);
+        chunkyContinue();
     }
 
-    @Override
-    public void onDisable() {
-        // Plugin shutdown logic
+    @EventHandler
+    public void on(PlayerJoinEvent event) {
+        if (! isRunning) {
+            chunkyPause();
+        }
+    }
+
+    @EventHandler
+    public void on(PlayerQuitEvent event) {
+        if (getServer().getOnlinePlayers().size() == 0) {
+            chunkyContinue();
+        }
+    }
+
+    public void chunkyContinue() {
+        getLogger().info("Continuing Chunky Generation");
+        getServer().dispatchCommand(Bukkit.getConsoleSender(), "chunky continue");
+        isRunning = true;
+    }
+
+    public void chunkyPause() {
+        getLogger().info("Pausing Chunky Generation");
+        getServer().dispatchCommand(Bukkit.getConsoleSender(), "chunky pause");
+        isRunning = false;
     }
 }

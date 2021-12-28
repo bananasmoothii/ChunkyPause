@@ -1,9 +1,9 @@
 name: ChunkyPause
 version: '${project.version}'
 main: fr.bananasmoothii.chunkypause.ChunkyPausePlugin
-api-version: 1.15
+api-version: 1.18
 prefix: ChunkyPause
 depend: [ Chunky ]
 authors: [ Bananasmoothii ]
 description: A very simple and tiny plugin that pauses Chunky world generation when the player count is not 0.
-website: https://github.com/TODO
+website: https://github.com/bananasmoothii/ChunkyPause
