@@ -10,7 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 // doing everything at once
 public final class ChunkyPausePlugin extends JavaPlugin implements Listener {
 
-    private boolean isRunning = true;
+    private boolean isRunning;
 
     @Override
     public void onEnable() {
@@ -20,7 +20,7 @@ public final class ChunkyPausePlugin extends JavaPlugin implements Listener {
 
     @EventHandler
     public void on(PlayerJoinEvent event) {
-        if (! isRunning) {
+        if (isRunning) {
             chunkyPause();
         }
     }
